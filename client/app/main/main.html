@@ -1,0 +1,71 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<header class="hero-unit" id="banner">
+  <div class="container">
+    <h1>Ponder</h1>
+    <p class="lead">The debate place. Think, expand, ponder - your brain mind thinking app</p>
+    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
+  </div>
+</header>
+
+<!-- added content -->
+
+<div class="container">
+  <br/>
+  <button id="addQuestionButton">Add question:</button>
+  <!-- add plus/drop down image here and also animation to show hide content box below -->
+  <form>  
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Message" ng-model="newThing.question">
+        
+      <h3>Add sides:</h3>
+      <input type="text" class="form-control side-pick" placeholder="Add side here" ng-model="newThing.side1" ng-required="true">
+      <input type="text" class="form-control side-pick" placeholder="Add side here" ng-model="newThing.side2" ng-required="true">
+        
+      <!-- testing adding more sides -->
+      <div ng-repeat="item in questionSide">
+        <input class="form-control side-pick" placeholder="Add side here" ng-model="item.value"\> 
+      </div><!-- error here -->
+        
+       <button ng-click="addfield()">Add field</button>  
+        
+      <!-- add ability to put more groups in -->
+      <h3>Add category</h3>
+      <p>To add more categories seperate the categories titles with <span>,</span></p>
+      <input type="text" class="form-control add-category" placeholder="e.g. animals, cars, lost" ng-model="newThing.category" ng-required="true">
+      <!-- add ability to add category links to the thing(question) -->
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-primary" ng-click="addThing()">Add New</button>
+      </span>
+    </div>
+  </form>
+
+    
+  <h2>Top questions:</h2>
+  <div ng-repeat="thing in questionThings" class="tweet">
+    <div class="row">
+      <h2 class="col-xs-2">
+        {{thing.user.name}}
+      </h2>
+      <div class="arrow_box col-xs-10">
+        <button ng-if="isMyTweet(thing)" type="button" class="close" ng-click="deleteThing(thing)">&times;</button>
+        <h2 class="message">
+          {{thing.name}} 
+        </h2>
+        <button ng-click="goToQuestion(thing)">go to question</button>
+        <span style="float: right;">({{thing.createdAt}})</span>
+      </div>
+    </div>
+  </div>
+    
+</div>
+
+<!-- end of added content -->
+
+<footer class="footer">
+  <div class="container">
+      <p>Angular Fullstack v2.1.0 |
+        <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
+         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
+  </div>
+</footer>
